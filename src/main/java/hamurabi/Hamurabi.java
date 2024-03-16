@@ -21,7 +21,15 @@ public class Hamurabi {
 
     public String printSummary(int yearCount, int peopleStarved, int newPeople, int currentPopulation, int harvestBushels, int bushelsPerAcres, int bushelsDestroyed, int bushelsStored, int ownedLand, int currentLandWorth) {
         StringBuilder sb = new StringBuilder();
-        sb.append("O great Hammurabi!\n").append("You are in year " + yearCount + " of your ten year rule.\n").append("In the previous year " + peopleStarved + "people starved to death.\n").append("In the previous year " + newPeople + "people entered the kingdom.\n").append("The population is now " + currentPopulation + "\n").append("We harvested " + harvestBushels + " bushels at " + bushelsPerAcres + " bushels per acre.").append("Rats destroyed " + bushelsDestroyed + " bushels, leaving " + bushelsStored + " bushels in storage.").append(" The city owns " + ownedLand + "acres of land.").append("Land is currently worth " + currentLandWorth + " bushels per acre.");
+        sb.append("O great Hammurabi!\n")
+                .append("You are in year " + yearCount + " of your ten year rule.\n")
+                .append("In the previous year " + peopleStarved + " people starved to death.\n")
+                .append("In the previous year " + newPeople + " people entered the kingdom.\n")
+                .append("The population is now " + currentPopulation+"." + "\n")
+                .append("We harvested " + harvestBushels + " bushels at " + bushelsPerAcres + " bushels per acre.\n")
+                .append("Rats destroyed " + bushelsDestroyed + " bushels, leaving " + bushelsStored + " bushels in storage.\n")
+                .append("The city owns " + ownedLand + " acres of land.\n")
+                .append("Land is currently worth " + currentLandWorth + " bushels per acre.");
         return sb.toString();
     }
 
@@ -94,7 +102,50 @@ public class Hamurabi {
     }
 
     public int plagueDeaths(int population) {
-        int numberOfDeaths = population / 2;
+        int numberOfDeaths = 0;
+        if (rand.nextInt(100) < 15) {
+            numberOfDeaths = population / 2;
+        }
         return numberOfDeaths;
     }
+
+    public int starvationDeaths(int population, int bushelsFedToPeople){
+        int numberOfDeaths = population - (bushelsFedToPeople/20);
+        if(numberOfDeaths<0){
+            numberOfDeaths = 0;
+        }
+        return numberOfDeaths;
+    }
+    public boolean uprising(int population, int howManyPeopleStarved){
+        double starvation = (double)howManyPeopleStarved / (double)population;
+        //System.out.println(starvation); for testing
+        if(starvation * 100 < 45){
+            return false;
+        }
+        return true;
+    }
+
+    public int immigrants(int population, int acresOwned, int grainInStorage){
+        return (20 * acresOwned + grainInStorage) / (100 * population) + 1;
+    }
+
+    public int harvest(int acres){ //, int bushelsUsedAsSeed  Removed the extra parameter
+        int myNewNumber = rand.nextInt(6)+1;
+        int harvestSeeds = acres * myNewNumber;
+        return harvestSeeds;
+    }
+    public int grainEatenByRats(int bushels){
+        int grainEatenByRats = 0;
+        if (rand.nextInt(100) < 40) {
+            int cropDestroyed = rand.nextInt(21) +10;
+            grainEatenByRats = bushels * cropDestroyed/100;
+        }
+        return grainEatenByRats;
+    }
+
+    public int newCostOfLand(){
+
+        return 0;
+    }
+
 }
