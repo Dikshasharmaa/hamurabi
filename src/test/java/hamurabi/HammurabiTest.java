@@ -1,4 +1,4 @@
-/*package hamurabi;
+package hamurabi;
 
 import static org.junit.Assert.*;
 
@@ -121,6 +121,6 @@ public class HammurabiTest {
         }
     }
 
+
 }
 
-*/
