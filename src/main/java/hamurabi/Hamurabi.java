@@ -202,6 +202,7 @@ public class Hamurabi {
         int numberOfDeaths = 0;
         if (rand.nextInt(100) < 15) {
             numberOfDeaths = population / 2;
+            System.out.println("Plague killed half of your population!");
         }
         return numberOfDeaths;
     }
@@ -236,6 +237,7 @@ public class Hamurabi {
         if (rand.nextInt(100) < 40) {
             int cropDestroyed = rand.nextInt(21) +10;
             grainEatenByRats = bushels * cropDestroyed/100;
+            System.out.println("Rats destroyed your Crop! ");
         }
         return grainEatenByRats;
     }
